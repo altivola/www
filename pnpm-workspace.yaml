@@ -1,0 +1,6 @@
+# pnpm only runs install scripts for packages listed here.
+allowBuilds:
+  esbuild: true
+  sharp: false
+  # Cloudflare's local runtime, used by `wrangler dev`.
+  workerd: true

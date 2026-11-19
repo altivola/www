@@ -1,0 +1,24 @@
+{
+  "name": "www",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.21.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro build && wrangler dev",
+    "check": "biome check . && tsc --noEmit",
+    "deploy": "wrangler d1 migrations apply www --remote && wrangler deploy",
+    "leads": "wrangler d1 execute www --remote --command \"select created_at, contact, name, idea from ideas order by id desc limit 50\"",
+    "subscribers": "wrangler d1 execute www --remote --command \"select created_at, email from subscribers order by id desc\""
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.6.8",
+    "@cloudflare/workers-types": "^5.20261118.1",
+    "@tailwindcss/vite": "^4.3.5",
+    "astro": "^7.4.12",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.164.0"
+  }
+}

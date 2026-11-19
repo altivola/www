@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      - run: pnpm build
+
+  deploy:
+    needs: check
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.DEPLOY == 'cloudflare'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: deploy
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Check out the private secrets repo
+        uses: actions/checkout@v5
+        with:
+          repository: altivola/secrets
+          token: ${{ secrets.SECRETS_REPO_TOKEN }}
+          path: .secrets
+
+      - name: Load deploy settings
+        run: |
+          load() { # file key
+            value=$(grep -E "^$2=" "$1" | head -1 | cut -d= -f2-)
+            [ -n "$value" ] || { echo "Missing $2 in $1"; exit 1; }
+            echo "::add-mask::$value"
+            echo "$2=$value" >> "$GITHUB_ENV"
+          }
+          load .secrets/ci.env CLOUDFLARE_API_TOKEN
+          load .secrets/ci.env CLOUDFLARE_ACCOUNT_ID
+          rm -rf .secrets
+
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - name: Deploy the Worker
+        run: pnpm exec wrangler deploy
