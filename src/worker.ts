@@ -40,7 +40,7 @@ export default {
       const idea = text(body.idea, 5000)
       const contact = text(body.contact, 200)
       const name = text(body.name, 200)
-      if (!idea || !contact) return json(400, { error: 'Ide dan kontak wajib diisi.' })
+      if (!idea || !contact) return json(400, { error: 'Ide sama kontaknya diisi dulu ya.' })
       await env.DB.prepare('insert into ideas (idea, name, contact) values (?, ?, ?)').bind(idea, name, contact).run()
       return json(200, { ok: true })
     }
@@ -50,7 +50,8 @@ export default {
       if (!body) return json(400, { error: 'bad request' })
       if (body.website) return json(200, { ok: true })
       const email = text(body.email, 200)?.toLowerCase()
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json(400, { error: 'Email-nya belum valid.' })
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+        return json(400, { error: 'Email-nya kayaknya belum bener, cek lagi ya.' })
       await env.DB.prepare('insert into subscribers (email) values (?) on conflict (email) do nothing')
         .bind(email)
         .run()

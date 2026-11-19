@@ -6,7 +6,7 @@ const products = [
     name: 'altivola-db',
     ready: true,
     href: 'https://github.com/altivola/altivola-db',
-    text: 'Aplikasi database buat developer. Enam jenis database dalam satu app, ada versi Mac. Gratis.',
+    text: 'Aplikasi database buat developer. Enam jenis database dalam satu aplikasi, ada versi Mac. Gratis.',
   },
   { name: 'Undangan nikah', text: 'Pilih template, isi nama dan tanggal, sebar lewat WhatsApp.' },
   { name: 'CS WhatsApp AI', text: 'Balas chat pelanggan 24 jam, jawabannya diambil dari dokumen usaha kamu.' },
@@ -18,7 +18,7 @@ const products = [
 
 const title = 'Altivola: biar urusan digital kamu beres sendiri'
 const description =
-  'Studio software kecil dari Indonesia. Kami bikin alat digital yang gampang dipakai siapa aja: undangan nikah online, CS WhatsApp AI, sampai agent AI.'
+  'Studio software kecil dari Indonesia. Bikin alat digital yang gampang dipakai siapa aja: undangan nikah online, CS WhatsApp AI, sampai agent AI.'
 
 const field =
   'w-full rounded-xl border border-field bg-bg px-4 py-3.5 text-base text-fg placeholder:text-faint focus:border-accent focus:outline-none'
@@ -66,7 +66,7 @@ const field =
           Biar urusan digital kamu <span class="rounded-lg bg-accent px-2.5 text-bg">beres sendiri.</span>
         </h1>
         <p class="max-w-[620px] text-lg leading-relaxed text-muted sm:text-[19px]">
-          Studio software kecil dari Indonesia. Kami bikin alat digital yang gampang dipakai siapa aja.
+          Studio software kecil dari Indonesia, bikin alat digital yang gampang dipakai siapa aja.
         </p>
         <div class="flex flex-wrap gap-3">
           <a href="#produk" class="rounded-[10px] bg-accent px-5.5 py-3.5 text-[15px] font-semibold text-bg hover:opacity-90"
@@ -98,7 +98,7 @@ const field =
               ) : (
                 <div class="flex flex-col gap-3.5 rounded-2xl border border-line bg-card p-7">
                   <span class="self-start rounded-full border border-field px-2.5 py-0.5 text-xs text-faint">
-                    Segera hadir
+                    Lagi dibikin
                   </span>
                   <h3 class="font-display text-xl">{p.name}</h3>
                   <p class="text-[15px] leading-relaxed text-muted">{p.text}</p>
@@ -140,7 +140,7 @@ const field =
               <span class="text-[17px] font-semibold"
                 >Nama kamu <span class="text-sm font-normal text-faint">(boleh dikosongin)</span></span
               >
-              <span class="text-sm leading-normal text-muted">Biar kami tau harus manggil siapa.</span>
+              <span class="text-sm leading-normal text-muted">Biar tau harus manggil kamu apa.</span>
               <input name="name" type="text" maxlength="200" autocomplete="name" placeholder="Nama kamu" class={field} />
             </label>
           </div>
@@ -148,7 +148,7 @@ const field =
             <span aria-hidden="true" class="grid size-9 place-items-center rounded-full bg-accent font-bold text-bg">3</span>
             <label class="flex flex-col gap-2">
               <span class="text-[17px] font-semibold">WhatsApp atau email</span>
-              <span class="text-sm leading-normal text-muted">Biar kami bisa hubungi kamu. Gak bakal kami sebar.</span>
+              <span class="text-sm leading-normal text-muted">Buat ngabarin kamu soal idenya. Gak bakal disebar.</span>
               <input
                 name="contact"
                 type="text"
@@ -166,7 +166,7 @@ const field =
             >Kirim ide</button
           >
           <p data-status class="-mt-3 text-center text-sm text-faint" aria-live="polite">
-            Nanti kami hubungi kamu lewat kontak di atas.
+            Nanti kamu dihubungi lewat kontak di atas.
           </p>
         </form>
       </section>
@@ -196,7 +196,7 @@ const field =
           <button
             type="submit"
             class="h-12 rounded-[10px] bg-accent px-5 text-[15px] font-semibold text-bg hover:opacity-90 disabled:opacity-60"
-            >Kabari saya</button
+            >Kabarin ya</button
           >
         </form>
       </section>
@@ -227,8 +227,8 @@ const field =
             if (status) {
               status.textContent =
                 form.dataset.form === '/api/idea'
-                  ? 'Makasih! Idenya udah masuk, nanti kami hubungi kamu.'
-                  : 'Sip, nanti kami kabari pas ada produk baru.'
+                  ? 'Makasih! Idenya udah masuk, nanti kamu dihubungi ya.'
+                  : 'Sip, nanti dikabarin pas ada produk baru.'
               status.style.color = 'var(--color-accent)'
             }
           } catch (err) {
