@@ -29,9 +29,9 @@ Both need `wrangler login` with the Altivola Cloudflare account.
 
 ## Deploy
 
-Pushing to `main` deploys the Worker through GitHub Actions (repo variable `DEPLOY=cloudflare`, tokens from `altivola/secrets` `ci.env`).
+Pushing to `main` applies new files in `migrations/` to D1 and deploys the Worker through GitHub Actions (repo variable `DEPLOY=cloudflare`, tokens from `altivola/secrets` `ci.env`).
 
-The CI token cannot change D1, so a new file in `migrations/` is applied by hand before pushing: `pnpm exec wrangler d1 migrations apply www --remote`.
+The entries can also be browsed in altivola-db (v0.2.3 or later) as the connection `personal/www/prod`.
 
 ## License
 

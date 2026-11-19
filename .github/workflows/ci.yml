@@ -56,5 +56,5 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      - name: Deploy the Worker
-        run: pnpm exec wrangler deploy
+      - name: Apply database migrations and deploy the Worker
+        run: pnpm run deploy
