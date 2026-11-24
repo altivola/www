@@ -1,18 +1,26 @@
 ---
 import '../styles/global.css'
 
-const products = [
+const availableProducts = [
   {
     name: 'altivola-db',
-    ready: true,
-    href: 'https://github.com/altivola/altivola-db#download',
-    cta: 'Download gratis →',
     text: 'Aplikasi database gratis buat developer. Tinggal download, ada versi Mac dan Windows. Bisa dipakai bareng agent AI lewat MCP.',
+    image: '/products/altivola-db.webp',
+    imageAlt: 'Tampilan editor SQL dan hasil kueri di altivola-db',
+    href: 'https://github.com/altivola/altivola-db#download',
+    cta: 'Download gratis',
   },
   {
-    name: 'Undangan nikah',
-    text: 'Pilih template atau atur sendiri: posisi tiap bagian, foto, sampai kata-katanya. Mau cepat? Biar dibikinin otomatis dari template.',
+    name: 'Altivola Wedding',
+    text: 'Bikin undangan nikah online dari pilihan desain, kirim link khusus buat tiap tamu, dan cek konfirmasi kehadiran dalam satu tempat.',
+    image: '/products/altivola-wedding.webp',
+    imageAlt: 'Contoh undangan Ruang Cetak di Altivola Wedding',
+    href: 'https://wedding.altivola.workers.dev',
+    cta: 'Buka website',
   },
+]
+
+const productIdeas = [
   {
     name: 'Tim AI',
     text: 'Satu tim AI lengkap, dari engineering, marketing, sampai finance. Ada koordinator yang bikin rencana, bagi tugas, dan ngecek hasilnya sampai beres.',
@@ -88,31 +96,48 @@ const field =
 
       <section id="produk" class="flex scroll-mt-6 flex-col gap-6 pb-24">
         <h2 class="font-display text-[32px] font-bold tracking-[-0.02em]">Produk</h2>
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-5 md:grid-cols-2">
           {
-            products.map((p) =>
-              p.ready ? (
-                <a
-                  href={p.href}
-                  class="flex flex-col gap-3.5 rounded-2xl border border-accent bg-card p-7 hover:bg-[#161616] sm:col-span-2 lg:col-span-1"
-                >
-                  <span class="self-start rounded-full bg-accent px-2.5 py-0.5 text-xs font-semibold text-bg">
+            availableProducts.map((product) => (
+              <article class="flex min-w-0 flex-col overflow-hidden rounded-2xl border border-line bg-card transition-colors focus-within:border-accent hover:border-field">
+                <img
+                  src={product.image}
+                  alt={product.imageAlt}
+                  width="1120"
+                  height="700"
+                  loading="lazy"
+                  decoding="async"
+                  class="aspect-[8/5] w-full border-b border-line bg-bg object-cover"
+                />
+                <div class="flex flex-1 flex-col items-start gap-3 px-5 py-6 sm:p-7">
+                  <span class="rounded-full bg-accent px-2.5 py-1 text-sm font-semibold text-bg">
                     Udah bisa dipakai
                   </span>
-                  <h3 class="font-display text-2xl">{p.name}</h3>
-                  <p class="text-[15px] leading-relaxed text-muted">{p.text}</p>
-                  <span class="mt-auto text-sm text-accent">{p.cta}</span>
-                </a>
-              ) : (
-                <div class="flex flex-col gap-3.5 rounded-2xl border border-line bg-card p-7">
-                  <span class="self-start rounded-full border border-field px-2.5 py-0.5 text-xs text-faint">
-                    Masih ide
-                  </span>
-                  <h3 class="font-display text-xl">{p.name}</h3>
-                  <p class="text-[15px] leading-relaxed text-muted">{p.text}</p>
+                  <h3 class="font-display text-2xl font-bold">{product.name}</h3>
+                  <p class="mb-2 leading-relaxed text-muted">{product.text}</p>
+                  <a
+                    href={product.href}
+                    aria-label={`${product.cta}: ${product.name}`}
+                    class="mt-auto inline-flex min-h-11 items-center rounded-lg border border-field px-4 text-sm font-semibold text-accent hover:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  >
+                    {product.cta}
+                  </a>
                 </div>
-              ),
-            )
+              </article>
+            ))
+          }
+        </div>
+        <div class="grid gap-4 md:grid-cols-3">
+          {
+            productIdeas.map((product) => (
+              <article class="flex flex-col gap-3 rounded-2xl border border-line bg-card p-5 sm:p-7">
+                <span class="self-start rounded-full border border-field px-2.5 py-0.5 text-sm text-faint">
+                  Masih ide
+                </span>
+                <h3 class="font-display text-xl font-bold">{product.name}</h3>
+                <p class="leading-relaxed text-muted">{product.text}</p>
+              </article>
+            ))
           }
         </div>
       </section>
